@@ -144,7 +144,7 @@
 			<h2 class="section-title">Complete Home Watch Services</h2>
 			<p class="section-desc">
 				Whether you're a snowbird heading north for the summer or a homeowner who travels frequently,
-				we give your Cape Coral or Fort Myers property the attention it deserves.
+				we give your Southwest Florida property the attention it deserves.
 			</p>
 		</div>
 
