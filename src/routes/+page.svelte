@@ -1,11 +1,8 @@
 <script lang="ts">
-	// In Svelte 5, $state() is how you declare reactive variables.
-	// It's like @State in SwiftUI or a MutableStateFlow in Kotlin —
-	// when the value changes, any UI that reads it re-renders automatically.
 	let mobileMenuOpen = $state(false);
 	let formSubmitted = $state(false);
+	let showAllServices = $state(false);
 
-	// $state() works on objects too — each property is individually reactive
 	let form = $state({
 		name: '',
 		email: '',
@@ -21,7 +18,6 @@
 	function submitForm(e: Event) {
 		e.preventDefault();
 		// TODO: Wire this to a real form handler.
-		// Easy options: Formspree (just an action URL), or a SvelteKit +page.server.ts action.
 		formSubmitted = true;
 	}
 
@@ -55,6 +51,16 @@
 			icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>`,
 			title: 'Photo Documentation',
 			desc: 'Every visit is documented with timestamped photos. You get a complete visual record of your property\'s condition over time.'
+		},
+		{
+			icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>`,
+			title: 'Pool & Lanai',
+			desc: 'We check pool and spa equipment, water clarity, lanai screens, and gates — making sure everything is clean, functioning, and secured between services.'
+		},
+		{
+			icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>`,
+			title: 'Boat, Dock & Lift',
+			desc: 'For canal-front properties, we inspect the dock, lift, and boat cover — checking power at the lift, spigots, and that everything is in the same condition as originally observed.'
 		}
 	];
 </script>
@@ -141,19 +147,34 @@
 			</p>
 		</div>
 
-		<!-- {#each} is like ForEach in SwiftUI — iterates over an array and renders UI for each item -->
-		<!-- The (service.title) at the end is the key — helps Svelte efficiently update the DOM -->
 		<div class="services-grid">
-			{#each services as service (service.title)}
+			{#each services.slice(0, 4) as service (service.title)}
 				<div class="service-card">
-					<div class="service-icon">
-						<!-- {@html} renders raw HTML strings — use carefully, only for trusted content like our own SVGs -->
-						{@html service.icon}
-					</div>
+					<div class="service-icon">{@html service.icon}</div>
 					<h3>{service.title}</h3>
 					<p>{service.desc}</p>
 				</div>
 			{/each}
+		</div>
+
+		{#if showAllServices}
+			<div class="services-extra">
+				{#each services.slice(4) as service (service.title)}
+					<div class="extra-item">
+						<div class="extra-icon">{@html service.icon}</div>
+						<div>
+							<strong>{service.title}</strong>
+							<p>{service.desc}</p>
+						</div>
+					</div>
+				{/each}
+			</div>
+		{/if}
+
+		<div class="services-more">
+			<button class="btn-outline" onclick={() => (showAllServices = !showAllServices)}>
+				{showAllServices ? 'Show Less ↑' : 'View More Services ↓'}
+			</button>
 		</div>
 	</div>
 </section>
@@ -491,6 +512,48 @@
 		line-height: 1.7;
 	}
 
+	.btn-outline {
+		background: transparent;
+		color: var(--teal);
+		border: 2px solid var(--teal);
+		border-radius: 6px;
+		padding: 0.75rem 1.75rem;
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
+	}
+	.btn-outline:hover { background: var(--teal); color: var(--white); }
+
+	.services-more {
+		text-align: center;
+		margin-top: 2.5rem;
+	}
+
+	.services-extra {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border);
+	}
+	.extra-item {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+	.extra-icon {
+		width: 32px;
+		height: 32px;
+		flex-shrink: 0;
+		color: var(--teal);
+	}
+	.extra-icon :global(svg) { width: 100%; height: 100%; }
+	.extra-item strong { font-size: 0.95rem; color: var(--dark); display: block; margin-bottom: 0.2rem; }
+	.extra-item p { color: var(--mid); font-size: 0.875rem; line-height: 1.6; margin: 0; }
+
 	/* === SERVICES === */
 	.services {
 		background: var(--off-white);
@@ -498,8 +561,14 @@
 	}
 	.services-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1.5rem;
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 600px) {
+		.services-grid { grid-template-columns: 1fr; }
 	}
 	.service-card {
 		background: var(--white);
