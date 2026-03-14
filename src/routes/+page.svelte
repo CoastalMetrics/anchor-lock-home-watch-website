@@ -107,7 +107,7 @@
 	<div class="hero-bg"></div>
 	<div class="container hero-content">
 		<p class="hero-eyebrow">Cape Coral & Fort Myers, FL</p>
-		<h1 class="hero-headline">Your Home Is Safe<br />While You're Away</h1>
+		<h1 class="hero-headline">SWFL Most Advanced <br />Home Watch Company</h1>
 		<p class="hero-sub">
 			Professional home watch services for Southwest Florida homeowners.<br />
 			We keep a trusted eye on your property — so you don't have to worry.
