@@ -111,12 +111,13 @@
 <!-- ===================== HERO ===================== -->
 <section id="hero" class="hero">
 	<div class="hero-bg"></div>
+	<img src="/images/home-exterior.jpeg" alt="" class="hero-photo" aria-hidden="true" />
 	<div class="container hero-content">
-		<p class="hero-eyebrow">Cape Coral & Fort Myers, FL</p>
-		<h1 class="hero-headline">SWFL Most Advanced <br />Home Watch Company</h1>
+		<p class="hero-eyebrow">Punta Gorda | Cape Coral | Fort Myers | Estero </p>
+		<h1 class="hero-headline">SWFL's Most Advanced <br />Home Watch Services</h1>
 		<p class="hero-sub">
 			Professional home watch services for Southwest Florida homeowners.<br />
-			We keep a trusted eye on your property — so you don't have to worry.
+			We keep a trusted eye on your property — so you don't have to worry. Locked once, checked twice!
 		</p>
 		<div class="hero-actions">
 			<button class="btn-primary btn-lg" onclick={() => scrollTo('contact')}>Get a Free Consultation</button>
@@ -179,6 +180,13 @@
 	</div>
 </section>
 
+<!-- ===================== PHOTO STRIP ===================== -->
+<div class="photo-strip">
+	<img src="/images/pool-lanai.jpeg" alt="Pool and spa under lanai screen enclosure" />
+	<img src="/images/backyard-pool.jpeg" alt="Florida backyard with pool enclosure" />
+	<img src="/images/hurricane-shutters-1.jpeg" alt="Hurricane shutters installed on home" />
+</div>
+
 <!-- ===================== ABOUT / TRUST ===================== -->
 <section id="about" class="about">
 	<div class="container about-inner">
@@ -198,23 +206,30 @@
 				through checklists — just honest, reliable work you can count on.
 			</p>
 			<button class="btn-primary" onclick={() => scrollTo('contact')}>Reach Out Today</button>
+
+			<div class="about-stats">
+				<div class="stat">
+					<span class="stat-number">100%</span>
+					<span class="stat-label">Photo-documented visits with detailed thorough reports</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number">Southwest Florida</span>
+					<span class="stat-label">Locally Owned & Operated</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number">24/7</span>
+					<span class="stat-label">Emergency services and hurricane preparedness</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number">⚓ Anchor Lock Home Watch</span>
+					<span class="stat-label">Licensed, insured, and bonded</span>
+				</div>
+			</div>
 		</div>
-		<div class="about-stats">
-			<div class="stat">
-				<span class="stat-number">100%</span>
-				<span class="stat-label">Photo-Documented Visits</span>
-			</div>
-			<div class="stat">
-				<span class="stat-number">SW FL</span>
-				<span class="stat-label">Locally Owned & Operated</span>
-			</div>
-			<div class="stat">
-				<span class="stat-number">24/7</span>
-				<span class="stat-label">Emergency Response</span>
-			</div>
-			<div class="stat">
-				<span class="stat-number">⚓</span>
-				<span class="stat-label">Licensed & Insured</span>
+		<div class="about-photo-col">
+			<div class="owner-photo-wrap">
+				<img src="/images/rob-and-sherrie.jpg" alt="Rob and Sherrie Senitza, owners of Anchor Lock Home Watch" class="owner-photo" />
+				<p class="owner-caption">Rob & Sherrie Senitza<br /><span>Owners, Anchor Lock Home Watch</span></p>
 			</div>
 		</div>
 	</div>
@@ -429,6 +444,16 @@
 		padding: 6rem 0 5rem;
 		overflow: hidden;
 	}
+	.hero-photo {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		opacity: 0.18;
+		pointer-events: none;
+	}
 	.hero-bg {
 		position: absolute;
 		inset: 0;
@@ -596,44 +621,91 @@
 	}
 	.service-card p { color: var(--mid); font-size: 0.9rem; line-height: 1.65; }
 
+	/* === PHOTO STRIP === */
+	.photo-strip {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		height: 280px;
+		overflow: hidden;
+		position: relative;
+		z-index: 0;
+	}
+	.photo-strip img {
+		width: 100%;
+		height: 280px;
+		object-fit: cover;
+		display: block;
+	}
+
 	/* === ABOUT === */
 	.about {
 		background: var(--white);
 		padding: 5rem 0;
+		position: relative;
+		z-index: 1;
 	}
 	.about-inner {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 4rem;
-		align-items: center;
+		align-items: start;
 	}
 	.about-text .section-eyebrow { text-align: left; }
 	.about-text .section-title   { text-align: left; margin-bottom: 1.25rem; }
 	.about-text p { color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
-	.about-text .btn-primary { margin-top: 0.5rem; }
+	.about-text .btn-primary { margin-top: 0.5rem; margin-bottom: 2rem; }
 
 	.about-stats {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
+		gap: 1rem;
+		margin-top: 1.5rem;
 	}
 	.stat {
 		background: var(--off-white);
 		border-radius: 12px;
-		padding: 1.5rem;
+		padding: 1.25rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.3rem;
 		border: 1px solid var(--border);
 	}
 	.stat-number {
 		font-family: var(--font-heading);
-		font-size: 2rem;
+		font-size: 1.75rem;
 		font-weight: 700;
 		color: var(--navy);
 		line-height: 1;
 	}
-	.stat-label { font-size: 0.8rem; color: var(--mid); font-weight: 500; }
+	.stat-label { font-size: 0.75rem; color: var(--mid); font-weight: 500; }
+
+	.about-photo-col {
+		display: flex;
+		align-items: flex-start;
+	}
+	.owner-photo-wrap {
+		width: 100%;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+	}
+	.owner-photo {
+		width: 100%;
+		aspect-ratio: 4/5;
+		object-fit: cover;
+		object-position: center top;
+		display: block;
+	}
+	.owner-caption {
+		background: var(--navy);
+		color: var(--white);
+		text-align: center;
+		padding: 1rem;
+		font-weight: 600;
+		font-size: 0.95rem;
+		margin: 0;
+	}
+	.owner-caption span { font-weight: 400; opacity: 0.8; font-size: 0.85rem; }
 
 	/* === CONTACT === */
 	.contact {
@@ -742,7 +814,10 @@
 		.hero         { padding: 4rem 0 4rem; }
 		.hero-content { max-width: 100%; }
 
+		.photo-strip  { height: 180px; }
+
 		.about-inner   { grid-template-columns: 1fr; gap: 2.5rem; }
+		.about-photo-col { position: static; }
 		.contact-inner { grid-template-columns: 1fr; gap: 2rem; }
 		.form-row      { grid-template-columns: 1fr; }
 
@@ -753,5 +828,7 @@
 		.hero-actions { flex-direction: column; }
 		.hero-actions button { width: 100%; text-align: center; }
 		.about-stats { grid-template-columns: 1fr 1fr; }
+		.photo-strip { grid-template-columns: 1fr; height: auto; }
+		.photo-strip img { height: 200px; }
 	}
 </style>
