@@ -1,6 +1,9 @@
 <script lang="ts">
-	// $props() is Svelte 5's way of receiving component inputs
-	// On mobile you'd think of this like a view's initializer parameters
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
+
 	let { children } = $props();
 </script>
 
