@@ -19,7 +19,10 @@ const firebaseConfig = {
 	measurementId: PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
+import { getAuth } from 'firebase/auth';
+
 // Prevent re-initializing on hot reloads in dev
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
 
-export { app };
+export { app, auth };

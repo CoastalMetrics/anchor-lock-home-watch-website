@@ -80,6 +80,7 @@
 		<ul class="nav-links">
 			<li><button onclick={() => scrollTo('services')}>Services</button></li>
 			<li><button onclick={() => scrollTo('about')}>About</button></li>
+			<li><a href="/login" class="btn-login">Client Login</a></li>
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
 		</ul>
 
@@ -402,6 +403,18 @@
 	}
 	.nav-links button:hover { color: var(--white); }
 	.nav-links .btn-primary { color: var(--white); padding: 0.5rem 1.25rem; }
+
+	.btn-login {
+		color: rgba(255,255,255,0.85);
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		font-weight: 500;
+		padding: 0.5rem 0.75rem;
+		border-radius: 4px;
+		border: 1px solid rgba(255,255,255,0.3);
+		transition: color 0.15s, border-color 0.15s;
+	}
+	.btn-login:hover { color: var(--white); border-color: var(--white); }
 
 	.hamburger {
 		display: none;
