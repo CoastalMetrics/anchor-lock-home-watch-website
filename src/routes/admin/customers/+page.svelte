@@ -89,7 +89,7 @@
 <div class="page">
 	<div class="page-header">
 		<h1>Customers</h1>
-		<button class="btn-primary" onclick={() => { showForm = !showForm; formError = ''; }}>
+		<button class="btn-action" onclick={() => { showForm = !showForm; formError = ''; }}>
 			{showForm ? 'Cancel' : '+ Add Customer'}
 		</button>
 	</div>
@@ -142,7 +142,7 @@
 					<div class="alert error">{formError}</div>
 				{/if}
 				<div class="form-actions">
-					<button type="submit" class="btn-primary" disabled={formSubmitting}>
+					<button type="submit" class="btn-action" disabled={formSubmitting}>
 						{formSubmitting ? 'Creating…' : 'Create Customer & Send Welcome Email'}
 					</button>
 				</div>
@@ -206,20 +206,6 @@
 		margin: 0 0 1.25rem;
 	}
 
-	.btn-primary {
-		background: var(--navy);
-		color: var(--white);
-		border: none;
-		border-radius: 8px;
-		padding: 0.6rem 1.2rem;
-		font-family: var(--font-body);
-		font-size: 0.9rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: background 0.15s;
-	}
-	.btn-primary:hover:not(:disabled) { background: var(--navy-dark); }
-	.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
 	.form-card {
 		background: var(--white);
@@ -229,68 +215,11 @@
 		margin-bottom: 2rem;
 	}
 
-	.form-section-label {
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--mid);
-		margin: 1.25rem 0 0.75rem;
-	}
-	.form-section-label:first-of-type { margin-top: 0; }
-
-	.field-row {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-	}
-
+	/* .field-row--address overrides the global 1fr 1fr default */
 	.field-row--address {
 		grid-template-columns: 1fr 64px 1fr;
 		gap: 0.75rem;
 	}
-
-	.field {
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-		margin-bottom: 1rem;
-	}
-
-	label {
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: var(--dark);
-	}
-
-	.optional {
-		font-weight: 400;
-		color: var(--mid);
-	}
-
-	input {
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		padding: 0.6rem 0.75rem;
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		color: var(--dark);
-		outline: none;
-		transition: border-color 0.15s;
-	}
-	input:focus { border-color: var(--navy); }
-
-	.form-actions {
-		margin-top: 1.25rem;
-	}
-
-	.alert {
-		border-radius: 8px;
-		padding: 0.75rem 1rem;
-		font-size: 0.9rem;
-		margin-bottom: 1rem;
-	}
-	.alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
 	.empty {
 		color: var(--mid);

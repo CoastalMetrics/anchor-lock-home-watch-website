@@ -134,7 +134,7 @@
 
 		<div class="section-header">
 			<h2>Properties</h2>
-			<button class="btn-primary" onclick={() => { showForm = !showForm; formError = ''; }}>
+			<button class="btn-action" onclick={() => { showForm = !showForm; formError = ''; }}>
 				{showForm ? 'Cancel' : '+ Add Property'}
 			</button>
 		</div>
@@ -172,7 +172,7 @@
 						<div class="alert error">{formError}</div>
 					{/if}
 					<div class="form-actions">
-						<button type="submit" class="btn-primary" disabled={formSubmitting}>
+						<button type="submit" class="btn-action" disabled={formSubmitting}>
 							{formSubmitting ? 'Adding…' : 'Add Property'}
 						</button>
 					</div>
@@ -258,20 +258,6 @@
 		margin-bottom: 1rem;
 	}
 
-	.btn-primary {
-		background: var(--navy);
-		color: var(--white);
-		border: none;
-		border-radius: 8px;
-		padding: 0.6rem 1.2rem;
-		font-family: var(--font-body);
-		font-size: 0.9rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: background 0.15s;
-	}
-	.btn-primary:hover:not(:disabled) { background: var(--navy-dark); }
-	.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
 	.form-card {
 		background: var(--white);
@@ -281,48 +267,11 @@
 		margin-bottom: 1.5rem;
 	}
 
+	/* .field-row overrides the global 1fr 1fr default for address layout */
 	.field-row {
-		display: grid;
 		grid-template-columns: 1fr 64px 1fr;
 		gap: 0.75rem;
 	}
-
-	.field {
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-		margin-bottom: 1rem;
-	}
-
-	label {
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: var(--dark);
-	}
-
-	.optional { font-weight: 400; color: var(--mid); }
-
-	input {
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		padding: 0.6rem 0.75rem;
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		color: var(--dark);
-		outline: none;
-		transition: border-color 0.15s;
-	}
-	input:focus { border-color: var(--navy); }
-
-	.form-actions { margin-top: 1.25rem; }
-
-	.alert {
-		border-radius: 8px;
-		padding: 0.75rem 1rem;
-		font-size: 0.9rem;
-		margin-bottom: 1rem;
-	}
-	.alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
 	.empty { color: var(--mid); font-size: 0.95rem; }
 

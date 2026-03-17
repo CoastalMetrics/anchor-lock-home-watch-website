@@ -102,12 +102,12 @@
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
 			{#if loggedIn}
 				<li class="account-group">
-					<a href="/reports" class="btn-login">My Account</a>
-					{#if isAdmin}<a href="/admin" class="btn-login">Admin</a>{/if}
-					<button class="btn-signout-nav" onclick={() => signOut(auth)}>Sign out</button>
+					<a href="/reports" class="btn-nav">My Account</a>
+					{#if isAdmin}<a href="/admin" class="btn-nav">Admin</a>{/if}
+					<button class="btn-nav" onclick={() => signOut(auth)}>Sign out</button>
 				</li>
 			{:else}
-				<li><a href="/login" class="btn-login">Login</a></li>
+				<li><a href="/login" class="btn-nav">Login</a></li>
 			{/if}
 		</ul>
 
@@ -416,7 +416,7 @@
 		gap: 0.5rem;
 		list-style: none;
 	}
-	.nav-links button {
+	.nav-links button:not(.btn-nav) {
 		background: none;
 		border: none;
 		color: rgba(255,255,255,0.85);
@@ -428,7 +428,7 @@
 		border-radius: 4px;
 		transition: color 0.15s;
 	}
-	.nav-links button:hover { color: var(--white); }
+	.nav-links button:not(.btn-nav):hover { color: var(--white); }
 	.nav-links .btn-primary { color: var(--white); padding: 0.5rem 1.25rem; }
 
 	.account-group {
@@ -437,29 +437,6 @@
 		gap: 0.5rem;
 	}
 
-	.btn-signout-nav {
-		background: none;
-		border: none;
-		color: rgba(255,255,255,0.45);
-		font-family: var(--font-body);
-		font-size: 0.8rem;
-		cursor: pointer;
-		padding: 0;
-		transition: color 0.15s;
-	}
-	.btn-signout-nav:hover { color: rgba(255,255,255,0.75); }
-
-	.btn-login {
-		color: rgba(255,255,255,0.85);
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		font-weight: 500;
-		padding: 0.5rem 0.75rem;
-		border-radius: 4px;
-		border: 1px solid rgba(255,255,255,0.3);
-		transition: color 0.15s, border-color 0.15s;
-	}
-	.btn-login:hover { color: var(--white); border-color: var(--white); }
 
 	.hamburger {
 		display: none;

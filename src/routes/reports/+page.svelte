@@ -48,9 +48,9 @@
 				<div class="nav-right">
 					<span class="user-email">{userEmail}</span>
 					{#if isAdmin}
-						<a href="/admin" class="btn-admin">Admin</a>
+						<a href="/admin" class="btn-nav">Admin</a>
 					{/if}
-					<button class="btn-signout" onclick={handleSignOut}>Sign Out</button>
+					<button class="btn-nav" onclick={handleSignOut}>Sign Out</button>
 				</div>
 			</div>
 		</header>
@@ -130,31 +130,6 @@
 		font-size: 0.85rem;
 		color: rgba(255,255,255,0.7);
 	}
-	.btn-admin {
-		background: rgba(255,255,255,0.1);
-		border: 1px solid rgba(255,255,255,0.3);
-		color: var(--white);
-		border-radius: 6px;
-		padding: 0.4rem 0.9rem;
-		font-family: var(--font-body);
-		font-size: 0.85rem;
-		text-decoration: none;
-		transition: background 0.15s;
-	}
-	.btn-admin:hover { background: rgba(255,255,255,0.2); }
-
-	.btn-signout {
-		background: transparent;
-		border: 1px solid rgba(255,255,255,0.3);
-		color: rgba(255,255,255,0.85);
-		border-radius: 6px;
-		padding: 0.4rem 0.9rem;
-		font-family: var(--font-body);
-		font-size: 0.85rem;
-		cursor: pointer;
-		transition: border-color 0.15s, color 0.15s;
-	}
-	.btn-signout:hover { border-color: var(--white); color: var(--white); }
 
 	/* === CONTENT === */
 	main {

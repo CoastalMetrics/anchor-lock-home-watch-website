@@ -154,4 +154,24 @@
 		padding: 2.5rem;
 		overflow-y: auto;
 	}
+
+	/* === ADMIN FORM ELEMENTS === */
+	:global(.admin-main label) {
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--dark);
+	}
+
+	:global(.admin-main input) {
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		padding: 0.6rem 0.75rem;
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		color: var(--dark);
+		outline: none;
+		transition: border-color 0.15s;
+		width: 100%;
+	}
+	:global(.admin-main input:focus) { border-color: var(--navy); }
 </style>
