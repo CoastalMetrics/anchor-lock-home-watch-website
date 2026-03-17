@@ -1,8 +1,13 @@
 <script lang="ts">
-	import { onAuthStateChanged } from 'firebase/auth';
+	import { onAuthStateChanged, signOut } from 'firebase/auth';
 	import { doc, getDoc } from 'firebase/firestore';
 	import { auth, db } from '$lib/firebase';
 	import { browser } from '$app/environment';
+
+	async function handleSignOut() {
+		await signOut(auth);
+		window.location.href = '/';
+	}
 
 	let { children } = $props();
 
@@ -46,6 +51,7 @@
 				<a href="/admin/customers">Customers</a>
 			</nav>
 			<a href="/" class="sidebar-back">← Back to site</a>
+			<button class="sidebar-signout" onclick={handleSignOut}>Sign Out</button>
 		</aside>
 		<main class="admin-main">
 			{@render children()}
@@ -128,6 +134,19 @@
 		transition: color 0.15s;
 	}
 	.sidebar-back:hover { color: rgba(255,255,255,0.7); }
+
+	.sidebar-signout {
+		background: none;
+		border: none;
+		color: rgba(255,255,255,0.4);
+		font-family: var(--font-body);
+		font-size: 0.8rem;
+		cursor: pointer;
+		padding: 0.5rem 1.25rem 0;
+		text-align: left;
+		transition: color 0.15s;
+	}
+	.sidebar-signout:hover { color: rgba(255,255,255,0.7); }
 
 	/* === MAIN === */
 	.admin-main {

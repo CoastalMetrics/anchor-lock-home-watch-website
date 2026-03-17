@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { onAuthStateChanged, signOut } from 'firebase/auth';
-	import { auth } from '$lib/firebase';
+	import { doc, getDoc } from 'firebase/firestore';
+	import { auth, db } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
 	let status = $state<'checking' | 'authenticated' | 'redirecting'>('checking');
 	let userEmail = $state('');
+	let isAdmin = $state(false);
 
 	if (browser) {
-		onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, async (user) => {
 			if (user) {
 				userEmail = user.email ?? '';
+				const adminDoc = await getDoc(doc(db, 'admins', user.email ?? ''));
+				isAdmin = adminDoc.exists();
 				status = 'authenticated';
 			} else {
 				status = 'redirecting';
@@ -43,6 +47,9 @@
 				</a>
 				<div class="nav-right">
 					<span class="user-email">{userEmail}</span>
+					{#if isAdmin}
+						<a href="/admin" class="btn-admin">Admin</a>
+					{/if}
 					<button class="btn-signout" onclick={handleSignOut}>Sign Out</button>
 				</div>
 			</div>
@@ -123,6 +130,19 @@
 		font-size: 0.85rem;
 		color: rgba(255,255,255,0.7);
 	}
+	.btn-admin {
+		background: rgba(255,255,255,0.1);
+		border: 1px solid rgba(255,255,255,0.3);
+		color: var(--white);
+		border-radius: 6px;
+		padding: 0.4rem 0.9rem;
+		font-family: var(--font-body);
+		font-size: 0.85rem;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.btn-admin:hover { background: rgba(255,255,255,0.2); }
+
 	.btn-signout {
 		background: transparent;
 		border: 1px solid rgba(255,255,255,0.3);
