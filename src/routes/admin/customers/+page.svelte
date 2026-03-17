@@ -29,9 +29,10 @@
 	let formName = $state('');
 	let formEmail = $state('');
 	let formPhone = $state('');
+	let formAddress = $state('');
+	let formNickname = $state('');
 	let formError = $state('');
 	let formSubmitting = $state(false);
-	let formSuccess = $state('');
 
 	async function loadCustomers() {
 		loading = true;
@@ -56,26 +57,27 @@
 	async function handleCreateCustomer(e: SubmitEvent) {
 		e.preventDefault();
 		formError = '';
-		formSuccess = '';
 		formSubmitting = true;
 
 		try {
 			const functions = getFunctions(app);
 			const createCustomer = httpsCallable(functions, 'createCustomer');
-			await createCustomer({ name: formName, email: formEmail, phone: formPhone || undefined });
+			const result = await createCustomer({
+				name: formName,
+				email: formEmail,
+				phone: formPhone || undefined,
+				firstProperty: formAddress
+					? { address: formAddress, nickname: formNickname || undefined }
+					: undefined
+			});
 
 			// Send welcome magic link using Firebase's built-in email
 			await sendSignInLinkToEmail(auth, formEmail, getActionCodeSettings(formEmail));
 
-			formSuccess = `${formName} created and welcome email sent to ${formEmail}.`;
-			formName = '';
-			formEmail = '';
-			formPhone = '';
-			showForm = false;
-			await loadCustomers();
+			const { uid } = result.data as { uid: string };
+			window.location.href = `/admin/customers/${uid}`;
 		} catch (err: any) {
 			formError = err.message ?? 'Something went wrong.';
-		} finally {
 			formSubmitting = false;
 		}
 	}
@@ -84,31 +86,41 @@
 <div class="page">
 	<div class="page-header">
 		<h1>Customers</h1>
-		<button class="btn-primary" onclick={() => { showForm = !showForm; formError = ''; formSuccess = ''; }}>
+		<button class="btn-primary" onclick={() => { showForm = !showForm; formError = ''; }}>
 			{showForm ? 'Cancel' : '+ Add Customer'}
 		</button>
 	</div>
-
-	{#if formSuccess}
-		<div class="alert success">{formSuccess}</div>
-	{/if}
 
 	{#if showForm}
 		<div class="form-card">
 			<h2>New Customer</h2>
 			<form onsubmit={handleCreateCustomer}>
-				<div class="field">
-					<label for="name">Full Name *</label>
-					<input id="name" type="text" bind:value={formName} required placeholder="Jane Smith" />
+				<div class="form-section-label">Customer</div>
+				<div class="field-row">
+					<div class="field">
+						<label for="name">Full Name *</label>
+						<input id="name" type="text" bind:value={formName} required placeholder="Jane Smith" />
+					</div>
+					<div class="field">
+						<label for="phone">Phone</label>
+						<input id="phone" type="tel" bind:value={formPhone} placeholder="(239) 555-0100" />
+					</div>
 				</div>
 				<div class="field">
 					<label for="email">Email *</label>
 					<input id="email" type="email" bind:value={formEmail} required placeholder="jane@example.com" />
 				</div>
+
+				<div class="form-section-label">First Property</div>
 				<div class="field">
-					<label for="phone">Phone</label>
-					<input id="phone" type="tel" bind:value={formPhone} placeholder="(239) 555-0100" />
+					<label for="address">Property Address</label>
+					<input id="address" type="text" bind:value={formAddress} placeholder="1234 Coral Way, Cape Coral, FL 33904" />
 				</div>
+				<div class="field">
+					<label for="nickname">Nickname <span class="optional">(optional)</span></label>
+					<input id="nickname" type="text" bind:value={formNickname} placeholder="e.g. Beach House, Main Home" />
+				</div>
+
 				{#if formError}
 					<div class="alert error">{formError}</div>
 				{/if}
@@ -200,6 +212,22 @@
 		margin-bottom: 2rem;
 	}
 
+	.form-section-label {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--mid);
+		margin: 1.25rem 0 0.75rem;
+	}
+	.form-section-label:first-of-type { margin-top: 0; }
+
+	.field-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
 	.field {
 		display: flex;
 		flex-direction: column;
@@ -211,6 +239,11 @@
 		font-size: 0.85rem;
 		font-weight: 600;
 		color: var(--dark);
+	}
+
+	.optional {
+		font-weight: 400;
+		color: var(--mid);
 	}
 
 	input {
@@ -235,8 +268,7 @@
 		font-size: 0.9rem;
 		margin-bottom: 1rem;
 	}
-	.alert.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-	.alert.error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+	.alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
 	.empty {
 		color: var(--mid);

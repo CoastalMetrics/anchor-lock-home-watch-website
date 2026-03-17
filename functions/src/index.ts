@@ -33,10 +33,11 @@ export const createCustomer = onCall(async (request) => {
     );
   }
 
-  const {name, email, phone} = request.data as {
+  const {name, email, phone, firstProperty} = request.data as {
     name: string;
     email: string;
     phone?: string;
+    firstProperty?: {address: string; nickname?: string};
   };
 
   if (!name || !email) {
@@ -65,15 +66,34 @@ export const createCustomer = onCall(async (request) => {
     throw new HttpsError("internal", "Failed to create auth account.");
   }
 
-  // Create Firestore document — if this fails, clean up the Auth account
+  // Create user doc + optional first property atomically
   try {
-    await admin.firestore().doc(`users/${uid}`).set({
+    const db = admin.firestore();
+    const batch = db.batch();
+
+    batch.set(db.doc(`users/${uid}`), {
       name,
       email,
       phone: phone ?? null,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       createdBy: callerEmail,
     });
+
+    let propertyId: string | null = null;
+    if (firstProperty?.address) {
+      const propRef = db.collection(`users/${uid}/properties`).doc();
+      propertyId = propRef.id;
+      batch.set(propRef, {
+        address: firstProperty.address,
+        nickname: firstProperty.nickname ?? null,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+
+    await batch.commit();
+
+    logger.info(`Customer created: ${email} uid=${uid}`);
+    return {success: true, uid, propertyId};
   } catch (err) {
     logger.error(
       "Firestore write failed, deleting orphaned auth account",
@@ -85,10 +105,4 @@ export const createCustomer = onCall(async (request) => {
       "Failed to save customer. Please try again."
     );
   }
-
-  logger.info(`Customer created: ${email} uid=${uid}`);
-
-  // After this returns, the admin portal calls sendSignInLinkToEmail
-  // to send the welcome magic link via Firebase's built-in email service.
-  return {success: true, uid};
 });
