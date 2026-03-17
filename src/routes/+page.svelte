@@ -1,16 +1,24 @@
 <script lang="ts">
 	import { onAuthStateChanged, signOut } from 'firebase/auth';
-	import { auth } from '$lib/firebase';
+	import { doc, getDoc } from 'firebase/firestore';
+	import { auth, db } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
 	let mobileMenuOpen = $state(false);
 	let formSubmitted = $state(false);
 	let showAllServices = $state(false);
 	let loggedIn = $state(false);
+	let isAdmin = $state(false);
 
 	if (browser) {
-		onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, async (user) => {
 			loggedIn = !!user;
+			if (user?.email) {
+				const adminDoc = await getDoc(doc(db, 'admins', user.email));
+				isAdmin = adminDoc.exists();
+			} else {
+				isAdmin = false;
+			}
 		});
 	}
 
@@ -95,6 +103,7 @@
 			{#if loggedIn}
 				<li class="account-group">
 					<a href="/reports" class="btn-login">My Account</a>
+					{#if isAdmin}<a href="/admin" class="btn-login">Admin</a>{/if}
 					<button class="btn-signout-nav" onclick={() => signOut(auth)}>Sign out</button>
 				</li>
 			{:else}
