@@ -80,8 +80,8 @@
 		<ul class="nav-links">
 			<li><button onclick={() => scrollTo('services')}>Services</button></li>
 			<li><button onclick={() => scrollTo('about')}>About</button></li>
-			<li><a href="/login" class="btn-login">Client Login</a></li>
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
+			<li><a href="/login" class="btn-login">Login</a></li>
 		</ul>
 
 		<!-- Mobile hamburger — only visible on small screens -->
