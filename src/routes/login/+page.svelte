@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { getAuth, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
-	import { app } from '$lib/firebase';
+	import { getAuth, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, type User } from 'firebase/auth';
+	import { doc, getDoc } from 'firebase/firestore';
+	import { app, db } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
 	const auth = getAuth(app);
@@ -10,10 +11,15 @@
 	let errorMessage = $state('');
 	let pendingLink = $state('');
 
+	async function redirectAfterSignIn(user: User) {
+		const adminDoc = await getDoc(doc(db, 'admins', user.email ?? ''));
+		window.location.href = adminDoc.exists() ? '/admin' : '/reports';
+	}
+
 	// If already logged in, skip the form entirely
 	if (browser && !isSignInWithEmailLink(auth, window.location.href)) {
 		onAuthStateChanged(auth, (user) => {
-			if (user) window.location.href = '/reports';
+			if (user) redirectAfterSignIn(user);
 		});
 	}
 
@@ -23,9 +29,9 @@
 		const savedEmail = localStorage.getItem('emailForSignIn');
 		if (savedEmail) {
 			signInWithEmailLink(auth, savedEmail, window.location.href)
-				.then(() => {
+				.then((cred) => {
 					localStorage.removeItem('emailForSignIn');
-					window.location.href = '/reports';
+					redirectAfterSignIn(cred.user);
 				})
 				.catch((err) => {
 					step = 'error';
@@ -37,7 +43,7 @@
 			const emailFromUrl = params.get('email');
 			if (emailFromUrl) {
 				signInWithEmailLink(auth, emailFromUrl, window.location.href)
-					.then(() => { window.location.href = '/reports'; })
+					.then((cred) => redirectAfterSignIn(cred.user))
 					.catch((err) => { step = 'error'; errorMessage = err.message; });
 			} else {
 				// Different device — ask for email to complete this sign-in
@@ -49,8 +55,8 @@
 
 	async function confirmEmail() {
 		try {
-			await signInWithEmailLink(auth, email, pendingLink);
-			window.location.href = '/reports';
+			const cred = await signInWithEmailLink(auth, email, pendingLink);
+			redirectAfterSignIn(cred.user);
 		} catch (err: any) {
 			step = 'error';
 			errorMessage = err.message;

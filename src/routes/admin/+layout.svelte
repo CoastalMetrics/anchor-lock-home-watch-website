@@ -12,6 +12,7 @@
 	let { children } = $props();
 
 	let status = $state<'checking' | 'authorized' | 'unauthorized' | 'redirecting'>('checking');
+	let advancedOpen = $state(false);
 
 	if (browser) {
 		onAuthStateChanged(auth, async (user) => {
@@ -49,8 +50,17 @@
 			<nav class="sidebar-nav">
 				<a href="/admin">Dashboard</a>
 				<a href="/admin/customers">Customers</a>
+				<hr class="sidebar-divider" />
+				<a href="/">Back to site</a>
+				<button class="sidebar-advanced-toggle" onclick={() => advancedOpen = !advancedOpen}>
+					Advanced {advancedOpen ? '▲' : '▼'}
+				</button>
+				{#if advancedOpen}
+					<div class="sidebar-advanced">
+						<a href="/reports">My Account</a>
+					</div>
+				{/if}
 			</nav>
-			<a href="/" class="sidebar-back">← Back to site</a>
 			<button class="sidebar-signout" onclick={handleSignOut}>Sign Out</button>
 		</aside>
 		<main class="admin-main">
@@ -125,17 +135,37 @@
 		color: var(--white);
 	}
 
-	.sidebar-back {
-		padding: 1rem 1.25rem 0;
+	.sidebar-divider {
+		border: none;
 		border-top: 1px solid rgba(255,255,255,0.08);
+		margin: 0.5rem 0.75rem;
+	}
+
+	.sidebar-advanced-toggle {
+		background: none;
+		border: none;
 		color: rgba(255,255,255,0.4);
-		text-decoration: none;
+		font-family: var(--font-body);
 		font-size: 0.8rem;
+		cursor: pointer;
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+		width: 100%;
+		border-radius: 6px;
 		transition: color 0.15s;
 	}
-	.sidebar-back:hover { color: rgba(255,255,255,0.7); }
+	.sidebar-advanced-toggle:hover { color: rgba(255,255,255,0.7); }
 
-	.sidebar-signout {
+	.sidebar-advanced a {
+		font-size: 0.8rem !important;
+		color: rgba(255,255,255,0.4) !important;
+		padding-left: 1.25rem !important;
+	}
+	.sidebar-advanced a:hover {
+		color: rgba(255,255,255,0.7) !important;
+	}
+
+.sidebar-signout {
 		background: none;
 		border: none;
 		color: rgba(255,255,255,0.4);
