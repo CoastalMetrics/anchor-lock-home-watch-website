@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onAuthStateChanged } from 'firebase/auth';
+	import { onAuthStateChanged, signOut } from 'firebase/auth';
 	import { auth } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
@@ -92,7 +92,14 @@
 			<li><button onclick={() => scrollTo('services')}>Services</button></li>
 			<li><button onclick={() => scrollTo('about')}>About</button></li>
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
-			<li><a href={loggedIn ? '/reports' : '/login'} class="btn-login">{loggedIn ? 'My Account' : 'Login'}</a></li>
+			{#if loggedIn}
+				<li class="account-group">
+					<a href="/reports" class="btn-login">My Account</a>
+					<button class="btn-signout-nav" onclick={() => signOut(auth)}>Sign out</button>
+				</li>
+			{:else}
+				<li><a href="/login" class="btn-login">Login</a></li>
+			{/if}
 		</ul>
 
 		<!-- Mobile hamburger — only visible on small screens -->
@@ -414,6 +421,24 @@
 	}
 	.nav-links button:hover { color: var(--white); }
 	.nav-links .btn-primary { color: var(--white); padding: 0.5rem 1.25rem; }
+
+	.account-group {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.btn-signout-nav {
+		background: none;
+		border: none;
+		color: rgba(255,255,255,0.45);
+		font-family: var(--font-body);
+		font-size: 0.8rem;
+		cursor: pointer;
+		padding: 0;
+		transition: color 0.15s;
+	}
+	.btn-signout-nav:hover { color: rgba(255,255,255,0.75); }
 
 	.btn-login {
 		color: rgba(255,255,255,0.85);
