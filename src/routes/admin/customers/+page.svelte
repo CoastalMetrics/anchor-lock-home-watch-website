@@ -29,7 +29,10 @@
 	let formName = $state('');
 	let formEmail = $state('');
 	let formPhone = $state('');
-	let formAddress = $state('');
+	let formStreet = $state('');
+	let formCity = $state('');
+	let formState = $state('FL');
+	let formZip = $state('');
 	let formNickname = $state('');
 	let formError = $state('');
 	let formSubmitting = $state(false);
@@ -66,8 +69,8 @@
 				name: formName,
 				email: formEmail,
 				phone: formPhone || undefined,
-				firstProperty: formAddress
-					? { address: formAddress, nickname: formNickname || undefined }
+				firstProperty: formStreet
+					? { street: formStreet, city: formCity, state: formState, zip: formZip, nickname: formNickname || undefined }
 					: undefined
 			});
 
@@ -113,8 +116,22 @@
 
 				<div class="form-section-label">First Property</div>
 				<div class="field">
-					<label for="address">Property Address</label>
-					<input id="address" type="text" bind:value={formAddress} placeholder="1234 Coral Way, Cape Coral, FL 33904" />
+					<label for="street">Street Address</label>
+					<input id="street" type="text" bind:value={formStreet} placeholder="1234 Coral Way" />
+				</div>
+				<div class="field-row field-row--address">
+					<div class="field">
+						<label for="city">City</label>
+						<input id="city" type="text" bind:value={formCity} placeholder="Cape Coral" />
+					</div>
+					<div class="field field--state">
+						<label for="state">State</label>
+						<input id="state" type="text" bind:value={formState} maxlength="2" />
+					</div>
+					<div class="field">
+						<label for="zip">Zip</label>
+						<input id="zip" type="text" bind:value={formZip} placeholder="33904" maxlength="5" />
+					</div>
 				</div>
 				<div class="field">
 					<label for="nickname">Nickname <span class="optional">(optional)</span></label>
@@ -226,6 +243,11 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
+	}
+
+	.field-row--address {
+		grid-template-columns: 1fr 64px 1fr;
+		gap: 0.75rem;
 	}
 
 	.field {

@@ -15,10 +15,21 @@
 
 	type Property = {
 		id: string;
-		address: string;
+		street: string;
+		city: string;
+		state: string;
+		zip: string;
 		nickname: string | null;
 		createdAt: Date | null;
 	};
+
+	function fullAddress(p: Property) {
+		return `${p.street}, ${p.city}, ${p.state} ${p.zip}`;
+	}
+
+	function mapsUrl(p: Property) {
+		return `https://maps.google.com/?q=${encodeURIComponent(fullAddress(p))}`;
+	}
 
 	let customer = $state<Customer | null>(null);
 	let properties = $state<Property[]>([]);
@@ -27,7 +38,10 @@
 
 	// Add property form
 	let showForm = $state(false);
-	let formAddress = $state('');
+	let formStreet = $state('');
+	let formCity = $state('');
+	let formState = $state('FL');
+	let formZip = $state('');
 	let formNickname = $state('');
 	let formError = $state('');
 	let formSubmitting = $state(false);
@@ -53,7 +67,10 @@
 		);
 		properties = propSnap.docs.map((p) => ({
 			id: p.id,
-			address: p.data().address,
+			street: p.data().street,
+			city: p.data().city,
+			state: p.data().state,
+			zip: p.data().zip,
 			nickname: p.data().nickname ?? null,
 			createdAt: p.data().createdAt?.toDate() ?? null
 		}));
@@ -71,11 +88,17 @@
 		formSubmitting = true;
 		try {
 			await addDoc(collection(db, 'users', uid, 'properties'), {
-				address: formAddress,
+				street: formStreet,
+				city: formCity,
+				state: formState,
+				zip: formZip,
 				nickname: formNickname || null,
 				createdAt: serverTimestamp()
 			});
-			formAddress = '';
+			formStreet = '';
+			formCity = '';
+			formState = 'FL';
+			formZip = '';
 			formNickname = '';
 			showForm = false;
 			await loadData();
@@ -120,9 +143,25 @@
 			<div class="form-card">
 				<form onsubmit={handleAddProperty}>
 					<div class="field">
-						<label for="address">Property Address *</label>
-						<input id="address" type="text" bind:value={formAddress} required
-							placeholder="1234 Coral Way, Cape Coral, FL 33904" />
+						<label for="street">Street Address *</label>
+						<input id="street" type="text" bind:value={formStreet} required
+							placeholder="1234 Coral Way" />
+					</div>
+					<div class="field-row">
+						<div class="field">
+							<label for="city">City *</label>
+							<input id="city" type="text" bind:value={formCity} required
+								placeholder="Cape Coral" />
+						</div>
+						<div class="field field--state">
+							<label for="state">State *</label>
+							<input id="state" type="text" bind:value={formState} required maxlength="2" />
+						</div>
+						<div class="field">
+							<label for="zip">Zip *</label>
+							<input id="zip" type="text" bind:value={formZip} required
+								placeholder="33904" maxlength="5" />
+						</div>
 					</div>
 					<div class="field">
 						<label for="nickname">Nickname <span class="optional">(optional)</span></label>
@@ -146,13 +185,18 @@
 		{:else}
 			<div class="properties">
 				{#each properties as p}
-					<a href="/admin/customers/{uid}/properties/{p.id}" class="property-card">
-						<div class="property-main">
-							<strong>{p.nickname ?? p.address}</strong>
-							{#if p.nickname}<span class="property-address">{p.address}</span>{/if}
-						</div>
-						<span class="property-arrow">→</span>
-					</a>
+					<div class="property-card-wrap">
+						<a href="/admin/customers/{uid}/properties/{p.id}" class="property-card">
+							<div class="property-main">
+								<strong>{p.nickname ?? fullAddress(p)}</strong>
+								<span class="property-address">{fullAddress(p)}</span>
+							</div>
+							<span class="property-arrow">→</span>
+						</a>
+						<a href={mapsUrl(p)} target="_blank" rel="noopener noreferrer" class="map-link">
+							Map ↗
+						</a>
+					</div>
 				{/each}
 			</div>
 		{/if}
@@ -168,13 +212,9 @@
 	}
 	.loading a { color: var(--navy); }
 
-	.page {
-		max-width: 720px;
-	}
+	.page { max-width: 720px; }
 
-	.page-header {
-		margin-bottom: 0.5rem;
-	}
+	.page-header { margin-bottom: 0.5rem; }
 
 	.back {
 		font-size: 0.85rem;
@@ -241,6 +281,12 @@
 		margin-bottom: 1.5rem;
 	}
 
+	.field-row {
+		display: grid;
+		grid-template-columns: 1fr 64px 1fr;
+		gap: 0.75rem;
+	}
+
 	.field {
 		display: flex;
 		flex-direction: column;
@@ -254,10 +300,7 @@
 		color: var(--dark);
 	}
 
-	.optional {
-		font-weight: 400;
-		color: var(--mid);
-	}
+	.optional { font-weight: 400; color: var(--mid); }
 
 	input {
 		border: 1px solid var(--border);
@@ -281,10 +324,7 @@
 	}
 	.alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
-	.empty {
-		color: var(--mid);
-		font-size: 0.95rem;
-	}
+	.empty { color: var(--mid); font-size: 0.95rem; }
 
 	.properties {
 		display: flex;
@@ -292,7 +332,23 @@
 		gap: 0.75rem;
 	}
 
+	.property-card-wrap {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.map-link {
+		font-size: 0.8rem;
+		color: var(--teal);
+		text-decoration: none;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+	.map-link:hover { text-decoration: underline; }
+
 	.property-card {
+		flex: 1;
 		background: var(--white);
 		border: 1px solid var(--border);
 		border-radius: 12px;
@@ -313,17 +369,11 @@
 		flex-direction: column;
 		gap: 0.2rem;
 	}
-	.property-main strong {
-		font-size: 0.95rem;
-		color: var(--dark);
-	}
+	.property-main strong { font-size: 0.95rem; color: var(--dark); }
+
 	.property-address {
 		font-size: 0.8rem;
 		color: var(--mid);
 	}
-
-	.property-arrow {
-		color: var(--mid);
-		font-size: 1rem;
-	}
+	.property-arrow { color: var(--mid); font-size: 1rem; }
 </style>

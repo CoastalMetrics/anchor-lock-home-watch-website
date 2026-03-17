@@ -37,7 +37,13 @@ export const createCustomer = onCall(async (request) => {
     name: string;
     email: string;
     phone?: string;
-    firstProperty?: {address: string; nickname?: string};
+    firstProperty?: {
+      street: string;
+      city: string;
+      state: string;
+      zip: string;
+      nickname?: string;
+    };
   };
 
   if (!name || !email) {
@@ -80,11 +86,14 @@ export const createCustomer = onCall(async (request) => {
     });
 
     let propertyId: string | null = null;
-    if (firstProperty?.address) {
+    if (firstProperty?.street) {
       const propRef = db.collection(`users/${uid}/properties`).doc();
       propertyId = propRef.id;
       batch.set(propRef, {
-        address: firstProperty.address,
+        street: firstProperty.street,
+        city: firstProperty.city,
+        state: firstProperty.state,
+        zip: firstProperty.zip,
         nickname: firstProperty.nickname ?? null,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
