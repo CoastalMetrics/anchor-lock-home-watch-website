@@ -5,10 +5,13 @@
 	import { app, auth, db } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
-	const ACTION_CODE_SETTINGS = {
-		url: `${browser ? window.location.origin : ''}/login`,
-		handleCodeInApp: true
-	};
+	function getActionCodeSettings(email: string) {
+		const base = browser ? window.location.origin : '';
+		return {
+			url: `${base}/login?email=${encodeURIComponent(email)}`,
+			handleCodeInApp: true
+		};
+	}
 
 	type Customer = {
 		uid: string;
@@ -62,7 +65,7 @@
 			await createCustomer({ name: formName, email: formEmail, phone: formPhone || undefined });
 
 			// Send welcome magic link using Firebase's built-in email
-			await sendSignInLinkToEmail(auth, formEmail, ACTION_CODE_SETTINGS);
+			await sendSignInLinkToEmail(auth, formEmail, getActionCodeSettings(formEmail));
 
 			formSuccess = `${formName} created and welcome email sent to ${formEmail}.`;
 			formName = '';

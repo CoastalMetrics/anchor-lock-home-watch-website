@@ -6,8 +6,9 @@
 	const auth = getAuth(app);
 
 	let email = $state('');
-	let step = $state<'form' | 'sent' | 'completing' | 'error'>('form');
+	let step = $state<'form' | 'sent' | 'completing' | 'confirm' | 'error'>('form');
 	let errorMessage = $state('');
+	let pendingLink = $state('');
 
 	// If already logged in, skip the form entirely
 	if (browser && !isSignInWithEmailLink(auth, window.location.href)) {
@@ -31,8 +32,28 @@
 					errorMessage = err.message;
 				});
 		} else {
-			// User opened the link on a different device — ask for email again
-			step = 'form';
+			// Check if email was passed as a query param (e.g. from welcome link)
+			const params = new URLSearchParams(window.location.search);
+			const emailFromUrl = params.get('email');
+			if (emailFromUrl) {
+				signInWithEmailLink(auth, emailFromUrl, window.location.href)
+					.then(() => { window.location.href = '/reports'; })
+					.catch((err) => { step = 'error'; errorMessage = err.message; });
+			} else {
+				// Different device — ask for email to complete this sign-in
+				pendingLink = window.location.href;
+				step = 'confirm';
+			}
+		}
+	}
+
+	async function confirmEmail() {
+		try {
+			await signInWithEmailLink(auth, email, pendingLink);
+			window.location.href = '/reports';
+		} catch (err: any) {
+			step = 'error';
+			errorMessage = err.message;
 		}
 	}
 
@@ -86,6 +107,23 @@
 				<p>We sent a sign-in link to <strong>{email}</strong>. Click the link in that email to access your inspection reports.</p>
 				<p class="sent-note">The link expires in 1 hour. Check your spam folder if you don't see it.</p>
 			</div>
+
+		{:else if step === 'confirm'}
+			<h1>Confirm Your Email</h1>
+			<p class="login-desc">Enter your email address to complete sign-in.</p>
+			<form onsubmit={(e) => { e.preventDefault(); confirmEmail(); }}>
+				<label>
+					Email address
+					<input
+						type="email"
+						bind:value={email}
+						placeholder="you@email.com"
+						required
+						autofocus
+					/>
+				</label>
+				<button type="submit" class="btn-primary">Sign In</button>
+			</form>
 
 		{:else if step === 'completing'}
 			<div class="step-completing">
