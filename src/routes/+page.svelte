@@ -1,7 +1,18 @@
 <script lang="ts">
+	import { onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '$lib/firebase';
+	import { browser } from '$app/environment';
+
 	let mobileMenuOpen = $state(false);
 	let formSubmitted = $state(false);
 	let showAllServices = $state(false);
+	let loggedIn = $state(false);
+
+	if (browser) {
+		onAuthStateChanged(auth, (user) => {
+			loggedIn = !!user;
+		});
+	}
 
 	let form = $state({
 		name: '',
@@ -81,7 +92,7 @@
 			<li><button onclick={() => scrollTo('services')}>Services</button></li>
 			<li><button onclick={() => scrollTo('about')}>About</button></li>
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
-			<li><a href="/login" class="btn-login">Login</a></li>
+			<li><a href={loggedIn ? '/reports' : '/login'} class="btn-login">{loggedIn ? 'My Account' : 'Login'}</a></li>
 		</ul>
 
 		<!-- Mobile hamburger — only visible on small screens -->

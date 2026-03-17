@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
+	import { getAuth, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 	import { app } from '$lib/firebase';
 	import { browser } from '$app/environment';
 
@@ -8,6 +8,13 @@
 	let email = $state('');
 	let step = $state<'form' | 'sent' | 'completing' | 'error'>('form');
 	let errorMessage = $state('');
+
+	// If already logged in, skip the form entirely
+	if (browser && !isSignInWithEmailLink(auth, window.location.href)) {
+		onAuthStateChanged(auth, (user) => {
+			if (user) window.location.href = '/reports';
+		});
+	}
 
 	// If this page load is the callback from the email link, complete sign-in
 	if (browser && isSignInWithEmailLink(auth, window.location.href)) {
