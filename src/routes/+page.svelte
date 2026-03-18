@@ -132,6 +132,13 @@
 			<button onclick={() => scrollTo('services')}>Services</button>
 			<button onclick={() => scrollTo('about')}>About</button>
 			<button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button>
+			{#if loggedIn}
+				<a href="/reports" onclick={() => mobileMenuOpen = false}>My Account</a>
+				{#if isAdmin}<a href="/admin" onclick={() => mobileMenuOpen = false}>Admin</a>{/if}
+				<button onclick={() => { signOut(auth); mobileMenuOpen = false; }}>Sign Out</button>
+			{:else}
+				<a href="/login" onclick={() => mobileMenuOpen = false}>Login</a>
+			{/if}
 		</div>
 	{/if}
 </header>
