@@ -461,7 +461,8 @@
 		padding: 0.75rem 1.5rem 1.25rem;
 		gap: 0.25rem;
 	}
-	.mobile-menu button {
+	.mobile-menu button,
+	.mobile-menu a {
 		background: none;
 		border: none;
 		color: rgba(255,255,255,0.9);
@@ -472,6 +473,9 @@
 		padding: 0.6rem 0;
 		text-align: left;
 		border-bottom: 1px solid rgba(255,255,255,0.08);
+		text-decoration: none;
+		display: block;
+		width: 100%;
 	}
 	.mobile-menu .btn-primary {
 		margin-top: 0.5rem;
