@@ -148,11 +148,12 @@
 	<div class="hero-bg"></div>
 	<img src="/images/home-exterior.jpeg" alt="" class="hero-photo" aria-hidden="true" />
 	<div class="container hero-content">
-		<p class="hero-eyebrow">Punta Gorda | Cape Coral | Fort Myers | Estero </p>
-		<h1 class="hero-headline">SWFL's Most Advanced <br />Home Watch Services</h1>
+		<p class="hero-eyebrow">Cape Coral | Fort Myers | Matlacha | Pine Island</p>
+		<h1 class="hero-headline">Peace of Mind for<br />Your SWFL Home</h1>
 		<p class="hero-sub">
-			Professional home watch services for Southwest Florida homeowners.<br />
-			We keep a trusted eye on your property — so you don't have to worry. Locked once, checked twice!
+			<strong>Locked tight. Checked twice.</strong><br />
+			Local, professional home watch services for Southwest Florida homeowners. We provide
+			scheduled visits, detailed reports, and reliable oversight while you're away.
 		</p>
 		<div class="hero-actions">
 			<button class="btn-primary btn-lg" onclick={() => scrollTo('contact')}>Get a Free Consultation</button>
@@ -226,46 +227,68 @@
 <section id="about" class="about">
 	<div class="container about-inner">
 		<div class="about-text">
-			<p class="section-eyebrow">Why Anchor Lock</p>
-			<h2 class="section-title">Local, Trusted, Thorough</h2>
+			<p class="section-eyebrow">Why Anchor Lock Home Watch?</p>
+			<h2 class="section-title">Because your home deserves more than a quick glance</h2>
 			<p>
-				We live and work right here in Southwest Florida. We know the weather patterns, the risks
-				of the rainy season, and exactly what to look for in the homes on these canals.
+				At Anchor Lock Home Watch, we focus on consistency, communication, and local attention
+				so you're never left wondering what's happening at your property while you're away.
+				We're not a side business or a one-size-fits-all service. We're a dedicated home watch
+				company serving Cape Coral, Fort Myers, Matlacha, and Pine Island, designed around the
+				real needs of homeowners in this region.
 			</p>
-			<p>
-				Every visit gets a written report with photos — no "looks fine" over the phone. You get
-				documentation you can actually use if you ever need to file an insurance claim.
-			</p>
-			<p>
-				We're fully licensed and insured, and we treat every property like it's our own. No rushing
-				through checklists — just honest, reliable work you can count on.
-			</p>
-			<button class="btn-primary" onclick={() => scrollTo('contact')}>Reach Out Today</button>
-
-			<div class="about-stats">
-				<div class="stat">
-					<span class="stat-number">100%</span>
-					<span class="stat-label">Photo-documented visits with detailed thorough reports</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">Southwest Florida</span>
-					<span class="stat-label">Locally Owned & Operated</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">24/7</span>
-					<span class="stat-label">Emergency services and hurricane preparedness</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">⚓ Anchor Lock Home Watch</span>
-					<span class="stat-label">Licensed, insured, and bonded</span>
-				</div>
-			</div>
 		</div>
 		<div class="about-photo-col">
 			<div class="owner-photo-wrap">
-				<img src="/images/rob-and-sherrie.jpg" alt="Rob and Sherrie Senitza, owners of Anchor Lock Home Watch" class="owner-photo" />
-				<p class="owner-caption">Rob & Sherrie Senitza<br /><span>Owners, Anchor Lock Home Watch</span></p>
+				<img src="/images/rob-truck.jpeg" alt="Rob Senitza, owner of Anchor Lock Home Watch" class="owner-photo" />
+				<p class="owner-caption">Rob Senitza<br /><span>Owner, Anchor Lock Home Watch</span></p>
 			</div>
+		</div>
+	</div>
+
+	<div class="container features-container">
+		<h3 class="features-heading">What Sets Us Apart</h3>
+		<div class="features-grid">
+			<div class="feature">
+				<strong class="feature-title">Locally Focused</strong>
+				<p class="feature-text">
+					We live and work in the same communities we serve. That means we understand
+					Southwest Florida conditions — heat, humidity, storms, and seasonal vacancies —
+					and what they can do to a home if issues go unnoticed.
+				</p>
+			</div>
+			<div class="feature">
+				<strong class="feature-title">Consistent, Documented Visits</strong>
+				<p class="feature-text">
+					Each visit follows a structured checklist so nothing is overlooked. Our goal is
+					to spot visible issues early and notify you promptly, helping reduce surprises
+					and unnecessary stress.
+				</p>
+			</div>
+			<div class="feature">
+				<strong class="feature-title">Clear Communication</strong>
+				<p class="feature-text">
+					You'll know when your home was checked and what was found. We believe peace of
+					mind comes from transparency, not guesswork.
+				</p>
+			</div>
+			<div class="feature">
+				<strong class="feature-title">Customized for Your Property</strong>
+				<p class="feature-text">
+					No two homes are the same. Whether your home is a condo, single-family,
+					seasonal, or year-round vacancy, your home watch plan is tailored to your
+					property and how long you're away.
+				</p>
+			</div>
+			<div class="feature">
+				<strong class="feature-title">Professional by Design</strong>
+				<p class="feature-text">
+					Home watch isn't a favor. It's a responsibility. We take that responsibility
+					seriously and treat every home as if it were our own.
+				</p>
+			</div>
+		</div>
+		<div class="features-cta">
+			<button class="btn-primary" onclick={() => scrollTo('contact')}>Reach Out Today</button>
 		</div>
 	</div>
 </section>
@@ -284,15 +307,15 @@
 		<div class="contact-inner">
 			<div class="contact-info">
 				<h3>Serving</h3>
-				<p>Cape Coral · Fort Myers · Estero · Bonita Springs and surrounding Southwest Florida communities</p>
+				<p>Cape Coral · Fort Myers · Matlacha · Pine Island and surrounding Southwest Florida communities</p>
 
 				<h3>Hours</h3>
 				<p>Monday – Saturday: 8am – 6pm<br />Available by phone for emergencies 24/7</p>
 
 				<h3>Contact</h3>
 				<p>
-					<a href="tel:+12395550000">(239) 555-0000</a><br />
-					<a href="mailto:info@anchorlockwatch.com">info@anchorlockwatch.com</a>
+					<a href="tel:+12399907090">239-990-7090</a><br />
+					<a href="mailto:Rob@AnchorLockHomeWatch.com">Rob@AnchorLockHomeWatch.com</a>
 				</p>
 			</div>
 
@@ -314,7 +337,7 @@
 							</label>
 							<label>
 								Phone
-								<input type="tel" bind:value={form.phone} placeholder="(239) 555-0000" />
+								<input type="tel" bind:value={form.phone} placeholder="(239) 990-7090" />
 							</label>
 						</div>
 						<label>
@@ -340,10 +363,16 @@
 			<span class="logo-anchor">⚓</span>
 			<span>
 				<strong>Anchor Lock Home Watch</strong><br />
-				Cape Coral & Fort Myers, FL
+				Cape Coral · Fort Myers · Matlacha · Pine Island, FL
 			</span>
 		</div>
-		<p class="footer-copy">© {new Date().getFullYear()} Anchor Lock Home Watch. All rights reserved.</p>
+		<div class="footer-meta">
+			<p class="footer-links">
+				<a href="/privacy">Privacy Policy</a> ·
+				<a href="/terms">Terms of Service</a>
+			</p>
+			<p class="footer-copy">© {new Date().getFullYear()} Anchor Lock Home Watch. All rights reserved.</p>
+		</div>
 	</div>
 </footer>
 
@@ -699,31 +728,43 @@
 	.about-text .section-eyebrow { text-align: left; }
 	.about-text .section-title   { text-align: left; margin-bottom: 1.25rem; }
 	.about-text p { color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
-	.about-text .btn-primary { margin-top: 0.5rem; margin-bottom: 2rem; }
 
-	.about-stats {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-		margin-top: 1.5rem;
-	}
-	.stat {
-		background: var(--off-white);
-		border-radius: 12px;
-		padding: 1.25rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.3rem;
-		border: 1px solid var(--border);
-	}
-	.stat-number {
+	.features-container { margin-top: 4rem; }
+	.features-heading {
 		font-family: var(--font-heading);
-		font-size: 1.75rem;
+		font-size: 1.6rem;
 		font-weight: 700;
 		color: var(--navy);
-		line-height: 1;
+		text-align: center;
+		margin-bottom: 2rem;
 	}
-	.stat-label { font-size: 0.75rem; color: var(--mid); font-weight: 500; }
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem 2.5rem;
+	}
+	.feature {
+		padding-top: 1rem;
+		border-top: 2px solid var(--gold);
+	}
+	.feature-title {
+		display: block;
+		font-family: var(--font-heading);
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--navy);
+		margin-bottom: 0.5rem;
+	}
+	.feature-text {
+		font-size: 0.92rem;
+		color: var(--mid);
+		line-height: 1.6;
+		margin-bottom: 0;
+	}
+	.features-cta {
+		text-align: center;
+		margin-top: 2.5rem;
+	}
 
 	.about-photo-col {
 		display: flex;
@@ -850,6 +891,10 @@
 		line-height: 1.4;
 	}
 	.footer-brand .logo-anchor { font-size: 1.4rem; }
+	.footer-meta { text-align: right; }
+	.footer-links { font-size: 0.85rem; margin-bottom: 0.25rem; }
+	.footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; }
+	.footer-links a:hover { color: var(--white); text-decoration: underline; }
 	.footer-copy { font-size: 0.8rem; }
 
 	/* === RESPONSIVE === */
@@ -867,13 +912,25 @@
 		.contact-inner { grid-template-columns: 1fr; gap: 2rem; }
 		.form-row      { grid-template-columns: 1fr; }
 
+		.features-container { margin-top: 3rem; }
+		.features-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+
 		.footer-inner  { flex-direction: column; text-align: center; }
+		.footer-meta   { text-align: center; }
+	}
+
+	@media (max-width: 600px) {
+		.features-heading { font-size: 1.3rem; margin-bottom: 1.25rem; }
+		.features-grid { grid-template-columns: 1fr; gap: 1rem; }
+		.feature { padding-top: 0.65rem; border-top-width: 1px; }
+		.feature-title { font-size: 1rem; margin-bottom: 0.25rem; }
+		.feature-text { font-size: 0.88rem; line-height: 1.5; }
+		.features-cta { margin-top: 1.5rem; }
 	}
 
 	@media (max-width: 480px) {
 		.hero-actions { flex-direction: column; }
 		.hero-actions button { width: 100%; text-align: center; }
-		.about-stats { grid-template-columns: 1fr 1fr; }
 		.photo-strip { grid-template-columns: 1fr; height: auto; }
 		.photo-strip img { height: 200px; }
 	}
