@@ -1,26 +1,7 @@
 <script lang="ts">
-	import { onAuthStateChanged, signOut } from 'firebase/auth';
-	import { doc, getDoc } from 'firebase/firestore';
-	import { auth, db } from '$lib/firebase';
-	import { browser } from '$app/environment';
-
 	let mobileMenuOpen = $state(false);
 	let formSubmitted = $state(false);
 	let showAllServices = $state(false);
-	let loggedIn = $state(false);
-	let isAdmin = $state(false);
-
-	if (browser) {
-		onAuthStateChanged(auth, async (user) => {
-			loggedIn = !!user;
-			if (user?.email) {
-				const adminDoc = await getDoc(doc(db, 'admins', user.email));
-				isAdmin = adminDoc.exists();
-			} else {
-				isAdmin = false;
-			}
-		});
-	}
 
 	let form = $state({
 		name: '',
@@ -100,15 +81,6 @@
 			<li><button onclick={() => scrollTo('services')}>Services</button></li>
 			<li><button onclick={() => scrollTo('about')}>About</button></li>
 			<li><button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button></li>
-			{#if loggedIn}
-				<li class="account-group">
-					<a href="/reports" class="btn-nav">My Account</a>
-					{#if isAdmin}<a href="/admin" class="btn-nav">Admin</a>{/if}
-					<button class="btn-nav" onclick={() => signOut(auth)}>Sign out</button>
-				</li>
-			{:else}
-				<li><a href="/login" class="btn-nav">Login</a></li>
-			{/if}
 		</ul>
 
 		<!-- Mobile hamburger — only visible on small screens -->
@@ -132,13 +104,6 @@
 			<button onclick={() => scrollTo('services')}>Services</button>
 			<button onclick={() => scrollTo('about')}>About</button>
 			<button class="btn-primary" onclick={() => scrollTo('contact')}>Contact Us</button>
-			{#if loggedIn}
-				<a href="/reports" onclick={() => mobileMenuOpen = false}>My Account</a>
-				{#if isAdmin}<a href="/admin" onclick={() => mobileMenuOpen = false}>Admin</a>{/if}
-				<button onclick={() => { signOut(auth); mobileMenuOpen = false; }}>Sign Out</button>
-			{:else}
-				<a href="/login" onclick={() => mobileMenuOpen = false}>Login</a>
-			{/if}
 		</div>
 	{/if}
 </header>
@@ -467,13 +432,6 @@
 	.nav-links button:not(.btn-nav):hover { color: var(--white); }
 	.nav-links .btn-primary { color: var(--white); padding: 0.5rem 1.25rem; }
 
-	.account-group {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-
 	.hamburger {
 		display: none;
 		background: none;
@@ -490,8 +448,7 @@
 		padding: 0.75rem 1.5rem 1.25rem;
 		gap: 0.25rem;
 	}
-	.mobile-menu button,
-	.mobile-menu a {
+	.mobile-menu button {
 		background: none;
 		border: none;
 		color: rgba(255,255,255,0.9);
