@@ -562,7 +562,7 @@
 	.section-header {
 		text-align: center;
 		max-width: 620px;
-		margin: 0 auto 3.5rem;
+		margin: 0 auto 2rem;
 	}
 	.section-eyebrow {
 		font-size: 0.8rem;
@@ -632,13 +632,13 @@
 	/* === SERVICES === */
 	.services {
 		background: var(--off-white);
-		padding: 5rem 0;
+		padding: 3.5rem 0;
 	}
 	.services-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 1.5rem;
-		max-width: 760px;
+		gap: 1.25rem;
+		max-width: 920px;
 		margin: 0 auto;
 	}
 
@@ -659,7 +659,7 @@
 	.service-icon {
 		width: 40px;
 		height: 40px;
-		color: var(--teal);
+		color: var(--gold);
 		margin-bottom: 1rem;
 	}
 	.service-icon :global(svg) { width: 100%; height: 100%; }
