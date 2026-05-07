@@ -541,7 +541,9 @@
 	.hero-headline {
 		font-family: var(--font-heading);
 		font-size: clamp(2.2rem, 5vw, 3.5rem);
-		line-height: 1.15;
+		font-weight: 800;
+		line-height: 1.1;
+		letter-spacing: -0.01em;
 		margin-bottom: 1.25rem;
 	}
 	.hero-sub {
@@ -591,9 +593,11 @@
 	.section-title {
 		font-family: var(--font-heading);
 		font-size: clamp(1.6rem, 3vw, 2.25rem);
+		font-weight: 800;
 		color: var(--dark);
 		margin-bottom: 1rem;
-		line-height: 1.2;
+		line-height: 1.15;
+		letter-spacing: -0.01em;
 	}
 	.section-desc {
 		color: var(--mid);
@@ -722,10 +726,11 @@
 	.features-heading {
 		font-family: var(--font-heading);
 		font-size: 1.6rem;
-		font-weight: 700;
+		font-weight: 800;
 		color: var(--navy);
 		text-align: center;
 		margin-bottom: 2rem;
+		letter-spacing: -0.01em;
 	}
 	.features-grid {
 		display: grid;
@@ -740,7 +745,7 @@
 		display: block;
 		font-family: var(--font-heading);
 		font-size: 1.1rem;
-		font-weight: 700;
+		font-weight: 800;
 		color: var(--navy);
 		margin-bottom: 0.5rem;
 	}

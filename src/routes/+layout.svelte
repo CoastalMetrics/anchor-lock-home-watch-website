@@ -12,7 +12,7 @@
 	<meta name="description" content="Anchor Lock Home Watch — professional home watch services in Cape Coral & Fort Myers, FL." />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
 </svelte:head>
 
 {@render children()}
@@ -38,7 +38,7 @@
 		--border:    #E2E8F0;
 
 		--font-body:    'Inter', system-ui, sans-serif;
-		--font-heading: 'Playfair Display', Georgia, serif;
+		--font-heading: 'Montserrat', 'Inter', system-ui, sans-serif;
 	}
 
 	:global(html) {

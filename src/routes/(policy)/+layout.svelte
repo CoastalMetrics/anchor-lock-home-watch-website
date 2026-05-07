@@ -63,6 +63,8 @@
 	:global(.policy-main h1) {
 		font-family: var(--font-heading);
 		font-size: 2.25rem;
+		font-weight: 800;
+		letter-spacing: -0.01em;
 		color: var(--navy);
 		margin-bottom: 0.5rem;
 	}
@@ -74,6 +76,7 @@
 	:global(.policy-main h2) {
 		font-family: var(--font-heading);
 		font-size: 1.35rem;
+		font-weight: 700;
 		color: var(--navy);
 		margin: 1.75rem 0 0.5rem;
 	}
