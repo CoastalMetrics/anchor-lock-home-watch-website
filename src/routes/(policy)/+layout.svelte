@@ -4,11 +4,7 @@
 
 <header class="policy-header">
 	<a href="/" class="logo">
-		<span class="logo-anchor">⚓</span>
-		<span class="logo-text">
-			<span class="logo-name">Anchor Lock</span>
-			<span class="logo-sub">Home Watch</span>
-		</span>
+		<img src="/images/anchor-lock-logo-white-800.png" alt="Anchor Lock Home Watch" class="policy-nav-logo" />
 	</a>
 	<a href="/" class="back-link">← Back to home</a>
 </header>
@@ -46,10 +42,7 @@
 		gap: 1rem;
 	}
 	.logo { display: flex; align-items: center; gap: 0.55rem; color: var(--white); text-decoration: none; }
-	.logo-anchor { font-size: 1.6rem; }
-	.logo-text { display: flex; flex-direction: column; line-height: 1.15; }
-	.logo-name { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; }
-	.logo-sub { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+	.policy-nav-logo { height: 40px; width: auto; display: block; }
 	.back-link {
 		color: rgba(255,255,255,0.85);
 		font-size: 0.9rem;

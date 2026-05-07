@@ -69,10 +69,10 @@
 <header class="nav-wrapper">
 	<nav class="nav container">
 		<button class="logo" onclick={() => scrollTo('hero')}>
-			<span class="logo-anchor">⚓</span>
-			<span class="logo-text">
-				<span class="logo-name">Anchor Lock</span>
-				<span class="logo-sub">Home Watch</span>
+			<img src="/images/anchor-lock-logo-white-800.png" alt="Anchor Lock Home Watch" class="nav-logo" />
+			<span class="logo-wordmark">
+				<span class="logo-wordmark-name">Anchor Lock</span>
+				<span class="logo-wordmark-sub">Home Watch</span>
 			</span>
 		</button>
 
@@ -325,7 +325,7 @@
 <footer class="footer">
 	<div class="container footer-inner">
 		<div class="footer-brand">
-			<span class="logo-anchor">⚓</span>
+			<img src="/images/anchor-lock-logo-white-800.png" alt="Anchor Lock Home Watch" class="footer-logo" />
 			<span>
 				<strong>Anchor Lock Home Watch</strong><br />
 				Cape Coral · Fort Myers · Matlacha · Pine Island, FL
@@ -406,10 +406,42 @@
 		padding: 0;
 		color: var(--white);
 	}
-	.logo-anchor { font-size: 1.4rem; }
-	.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
-	.logo-name { font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; }
-	.logo-sub  { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+	.nav-logo    { height: 44px; width: auto; display: block; }
+	.footer-logo { height: 36px; width: auto; display: block; }
+
+	.logo-wordmark {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.1rem;
+		line-height: 1;
+	}
+	.logo-wordmark-name {
+		font-family: var(--font-body);
+		font-size: 1.15rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--white);
+	}
+	.logo-wordmark-sub {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-family: var(--font-body);
+		font-size: 0.58rem;
+		font-weight: 600;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.85);
+	}
+	.logo-wordmark-sub::before,
+	.logo-wordmark-sub::after {
+		content: '';
+		flex: 1;
+		height: 1px;
+		background: rgba(255,255,255,0.5);
+	}
 
 	.nav-links {
 		display: flex;
@@ -847,7 +879,6 @@
 		font-size: 0.9rem;
 		line-height: 1.4;
 	}
-	.footer-brand .logo-anchor { font-size: 1.4rem; }
 	.footer-meta { text-align: right; }
 	.footer-links { font-size: 0.85rem; margin-bottom: 0.25rem; }
 	.footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; }
