@@ -316,6 +316,9 @@
 				<a href="/terms">Terms of Service</a>
 			</p>
 			<p class="footer-copy">© {new Date().getFullYear()} Anchor Lock Home Watch. All rights reserved.</p>
+			<p class="footer-built">
+				Built by <a href="https://coastalmetrics.net" target="_blank" rel="noopener" class="footer-coastal">Coastal Metrics, LLC</a>
+			</p>
 		</div>
 	</div>
 </footer>
@@ -829,6 +832,9 @@
 	.footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; }
 	.footer-links a:hover { color: var(--white); text-decoration: underline; }
 	.footer-copy { font-size: 0.8rem; }
+	.footer-built { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 0.4rem; }
+	.footer-coastal { color: var(--gold-light); font-weight: 600; transition: color 0.2s; }
+	.footer-coastal:hover { color: var(--white); }
 
 	/* === RESPONSIVE === */
 	@media (max-width: 768px) {
