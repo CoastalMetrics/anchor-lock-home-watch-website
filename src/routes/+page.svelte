@@ -686,15 +686,17 @@
 
 	/* === ABOUT === */
 	.about {
-		background: var(--white);
+		background: var(--off-white);
 		padding: 5rem 0;
 		position: relative;
 		z-index: 1;
+		border-top: 3px solid var(--gold);
 	}
 	.about-container { overflow: hidden; }
 	.about-title { text-align: left; margin-bottom: 1.25rem; }
 	.about-p { color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
-	.about-cta { margin-top: 1.5rem; display: inline-block; }
+	.about-p:first-of-type { font-size: 1.05rem; color: var(--dark); }
+	.about-cta { margin-top: 1.5rem; display: block; width: fit-content; margin-left: auto; margin-right: auto; }
 
 	.about-photo-col {
 		float: right;
@@ -722,12 +724,13 @@
 		font-weight: 600;
 		font-size: 0.95rem;
 		margin: 0;
+		border-radius: 0 0 16px 16px;
 	}
 	.owner-caption span { font-weight: 400; opacity: 0.8; font-size: 0.85rem; }
 
 	/* === CONTACT === */
 	.contact {
-		background: var(--off-white);
+		background: var(--white);
 		padding: 5rem 0;
 	}
 	.contact-inner {
