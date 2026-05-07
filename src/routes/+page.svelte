@@ -190,70 +190,50 @@
 
 <!-- ===================== ABOUT / TRUST ===================== -->
 <section id="about" class="about">
-	<div class="container about-inner">
-		<div class="about-text">
-			<p class="section-eyebrow">Why Anchor Lock Home Watch?</p>
-			<h2 class="section-title">Because your home deserves more than a quick glance</h2>
-			<p>
-				At Anchor Lock Home Watch, we focus on consistency, communication, and local attention
-				so you're never left wondering what's happening at your property while you're away.
-				We're not a side business or a one-size-fits-all service. We're a dedicated home watch
-				company serving Cape Coral, Fort Myers, Matlacha, and Pine Island, designed around the
-				real needs of homeowners in this region.
-			</p>
-		</div>
+	<div class="container about-container">
 		<div class="about-photo-col">
 			<div class="owner-photo-wrap">
-				<img src="/images/rob-and-sherrie.jpeg" alt="Rob & Sherrie Senitza, owners of Anchor Lock Home Watch" class="owner-photo" />
-				<p class="owner-caption">Rob & Sherrie Senitza<br /><span>Owners, Anchor Lock Home Watch</span></p>
+				<img src="/images/rob-and-sherrie.jpeg" alt="Rob Senitza, owner of Anchor Lock Home Watch" class="owner-photo" />
+				<p class="owner-caption">Rob Senitza<br /><span>Owner, Anchor Lock Home Watch</span></p>
 			</div>
 		</div>
-	</div>
-
-	<div class="container features-container">
-		<h3 class="features-heading">What Sets Us Apart</h3>
-		<div class="features-grid">
-			<div class="feature">
-				<strong class="feature-title">Locally Focused</strong>
-				<p class="feature-text">
-					We live and work in the same communities we serve. That means we understand
-					Southwest Florida conditions — heat, humidity, storms, and seasonal vacancies —
-					and what they can do to a home if issues go unnoticed.
-				</p>
-			</div>
-			<div class="feature">
-				<strong class="feature-title">Consistent, Documented Visits</strong>
-				<p class="feature-text">
-					Each visit follows a structured checklist so nothing is overlooked. Our goal is
-					to spot visible issues early and notify you promptly, helping reduce surprises
-					and unnecessary stress.
-				</p>
-			</div>
-			<div class="feature">
-				<strong class="feature-title">Clear Communication</strong>
-				<p class="feature-text">
-					You'll know when your home was checked and what was found. We believe peace of
-					mind comes from transparency, not guesswork.
-				</p>
-			</div>
-			<div class="feature">
-				<strong class="feature-title">Customized for Your Property</strong>
-				<p class="feature-text">
-					No two homes are the same. Whether your home is a condo, single-family,
-					seasonal, or year-round vacancy, your home watch plan is tailored to your
-					property and how long you're away.
-				</p>
-			</div>
-			<div class="feature">
-				<strong class="feature-title">Professional by Design</strong>
-				<p class="feature-text">
-					Anchor Lock Home Watch is owner‑operated, and the owner has completed a background check, reflecting our commitment to trust, professionalism, and responsible access to your home.
-				</p>
-			</div>
-		</div>
-		<div class="features-cta">
-			<button class="btn-primary" onclick={() => scrollTo('contact')}>Reach Out Today</button>
-		</div>
+		<h2 class="section-title about-title">About Anchor Lock Home Watch</h2>
+		<p class="about-p">
+			<b>At Anchor Lock Home Watch</b>, we understand that your home is more than an investment.
+			It's peace of mind. Our approach is built on decades of experience, attention to
+			detail, and a deep connection to the Southwest Florida communities we serve.
+		</p>
+		<p class="about-p">
+			With <b>decades of experience in aerospace quality</b>, we bring a disciplined, methodical
+			mindset to every home watch visit. In aerospace, details matter, and that same
+			standard carries over into how we observe, document, and report on your property.
+			Nothing is rushed. Nothing is overlooked.
+		</p>
+		<p class="about-p">
+			Our hands-on experience with <b>home ownership, maintenance, remodeling, and upgrades
+			dating back to the early 1990's</b> gives us practical insight into how homes really
+			function, especially in Florida's demanding environment. We know how systems age,
+			where problems tend to start, and what "doesn't look right" long before minor issues
+			turn into major repairs.
+		</p>
+		<p class="about-p">
+			We are proud to be <b>local</b>. Our family lives here, and this isn't just where we work.
+			It's home. We've lived here through multiple hurricanes, and that firsthand experience
+			shaped how seriously we take preparation, post-storm checks, and clear communication
+			when it matters most. This region isn't theoretical to us. We know it street by street.
+		</p>
+		<p class="about-p">
+			From <b>Fort Myers and Cape Coral to Pine Island</b>, we are familiar with local construction
+			styles, weather patterns, flood concerns, and community expectations. That local
+			knowledge allows us to provide informed, reliable home watch services tailored
+			specifically to Southwest Florida homes.
+		</p>
+		<p class="about-p">
+			At Anchor Lock Home Watch, we combine <b>professional quality standards, real-world home
+			experience, and true local commitment</b> so you can leave your home knowing it's being
+			watched over by someone who cares as much as you do.
+		</p>
+		<button class="btn-primary about-cta" onclick={() => scrollTo('contact')}>Reach Out Today</button>
 	</div>
 </section>
 
@@ -711,57 +691,15 @@
 		position: relative;
 		z-index: 1;
 	}
-	.about-inner {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
-		align-items: start;
-	}
-	.about-text .section-eyebrow { text-align: left; }
-	.about-text .section-title   { text-align: left; margin-bottom: 1.25rem; }
-	.about-text p { color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
-
-	.features-container { margin-top: 4rem; }
-	.features-heading {
-		font-family: var(--font-heading);
-		font-size: 1.6rem;
-		font-weight: 800;
-		color: var(--navy);
-		text-align: center;
-		margin-bottom: 2rem;
-		letter-spacing: -0.01em;
-	}
-	.features-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 2rem 2.5rem;
-	}
-	.feature {
-		padding-top: 1rem;
-		border-top: 2px solid var(--gold);
-	}
-	.feature-title {
-		display: block;
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-		font-weight: 800;
-		color: var(--navy);
-		margin-bottom: 0.5rem;
-	}
-	.feature-text {
-		font-size: 0.92rem;
-		color: var(--mid);
-		line-height: 1.6;
-		margin-bottom: 0;
-	}
-	.features-cta {
-		text-align: center;
-		margin-top: 2.5rem;
-	}
+	.about-container { overflow: hidden; }
+	.about-title { text-align: left; margin-bottom: 1.25rem; }
+	.about-p { color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
+	.about-cta { margin-top: 1.5rem; display: inline-block; }
 
 	.about-photo-col {
-		display: flex;
-		align-items: flex-start;
+		float: right;
+		width: 38%;
+		margin: 0.25rem 0 1.5rem 2.5rem;
 	}
 	.owner-photo-wrap {
 		width: 100%;
@@ -899,25 +837,12 @@
 
 		.photo-strip  { height: 180px; }
 
-		.about-inner   { grid-template-columns: 1fr; gap: 2.5rem; }
-		.about-photo-col { position: static; }
+		.about-photo-col { float: none; width: 100%; margin: 0 0 1.5rem 0; }
 		.contact-inner { grid-template-columns: 1fr; gap: 2rem; }
 		.form-row      { grid-template-columns: 1fr; }
 
-		.features-container { margin-top: 3rem; }
-		.features-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
-
 		.footer-inner  { flex-direction: column; text-align: center; }
 		.footer-meta   { text-align: center; }
-	}
-
-	@media (max-width: 600px) {
-		.features-heading { font-size: 1.3rem; margin-bottom: 1.25rem; }
-		.features-grid { grid-template-columns: 1fr; gap: 1rem; }
-		.feature { padding-top: 0.65rem; border-top-width: 1px; }
-		.feature-title { font-size: 1rem; margin-bottom: 0.25rem; }
-		.feature-text { font-size: 0.88rem; line-height: 1.5; }
-		.features-cta { margin-top: 1.5rem; }
 	}
 
 	@media (max-width: 480px) {
