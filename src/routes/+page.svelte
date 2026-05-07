@@ -60,7 +60,7 @@
 		{
 			icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>`,
 			title: 'Boat, Dock & Lift',
-			desc: 'For canal-front properties, we inspect the dock, lift, and boat cover — checking power at the lift, spigots, and that everything is in the same condition as originally observed.'
+			desc: 'For water-front properties, we inspect the dock, lift, and boat cover — checking power at the lift, spigots, and that everything is in the same condition as originally observed.'
 		}
 	];
 </script>
@@ -125,7 +125,7 @@
 			<button class="btn-ghost btn-lg" onclick={() => scrollTo('services')}>See What We Do</button>
 		</div>
 		<div class="hero-badges">
-			<span>✓ Licensed & Insured</span>
+			<span>✓ Licensed, Insured, & Bonded</span>
 			<span>✓ Detailed Visit Reports</span>
 			<span>✓ Locally Owned</span>
 		</div>
@@ -204,8 +204,8 @@
 		</div>
 		<div class="about-photo-col">
 			<div class="owner-photo-wrap">
-				<img src="/images/rob-truck.jpeg" alt="Rob Senitza, owner of Anchor Lock Home Watch" class="owner-photo" />
-				<p class="owner-caption">Rob Senitza<br /><span>Owner, Anchor Lock Home Watch</span></p>
+				<img src="/images/rob-and-sherrie.jpeg" alt="Rob & Sherrie Senitza, owners of Anchor Lock Home Watch" class="owner-photo" />
+				<p class="owner-caption">Rob & Sherrie Senitza<br /><span>Owners, Anchor Lock Home Watch</span></p>
 			</div>
 		</div>
 	</div>
@@ -247,8 +247,7 @@
 			<div class="feature">
 				<strong class="feature-title">Professional by Design</strong>
 				<p class="feature-text">
-					Home watch isn't a favor. It's a responsibility. We take that responsibility
-					seriously and treat every home as if it were our own.
+					Anchor Lock Home Watch is owner‑operated, and the owner has completed a background check, reflecting our commitment to trust, professionalism, and responsible access to your home.
 				</p>
 			</div>
 		</div>
