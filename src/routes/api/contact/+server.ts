@@ -14,7 +14,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const { error } = await resend.emails.send({
 		from: 'Anchor Lock Home Watch <noreply@anchorlockhomewatch.com>',
-		to: 'Rob@AnchorLockHomeWatch.com',
+		to: 'developer@coastalmetrics.net',
 		replyTo: email,
 		subject: `New inquiry from ${name}`,
 		html: `
