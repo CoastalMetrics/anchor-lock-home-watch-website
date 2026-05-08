@@ -1,13 +1,16 @@
 <script lang="ts">
 	let mobileMenuOpen = $state(false);
 	let formSubmitted = $state(false);
+	let formError = $state('');
+	let formLoading = $state(false);
 	let showAllServices = $state(false);
 
 	let form = $state({
 		name: '',
 		email: '',
 		phone: '',
-		message: ''
+		message: '',
+		optIn: false
 	});
 
 	function scrollTo(id: string) {
@@ -15,10 +18,30 @@
 		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 	}
 
-	function submitForm(e: Event) {
+	async function submitForm(e: Event) {
 		e.preventDefault();
-		// TODO: Wire this to a real form handler.
-		formSubmitted = true;
+		formLoading = true;
+		formError = '';
+
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(form)
+			});
+
+			const data = await res.json();
+
+			if (!res.ok) {
+				formError = data.error ?? 'Something went wrong. Please try again.';
+			} else {
+				formSubmitted = true;
+			}
+		} catch {
+			formError = 'Network error. Please check your connection and try again.';
+		} finally {
+			formLoading = false;
+		}
 	}
 
 	const services = [
@@ -292,7 +315,16 @@
 							Tell us about your property
 							<textarea bind:value={form.message} rows="4" placeholder="Address, how often you need visits, any specific concerns..."></textarea>
 						</label>
-						<button type="submit" class="btn-primary btn-lg btn-full">Send Message</button>
+						<label class="opt-in-label">
+							<input type="checkbox" bind:checked={form.optIn} />
+							<span>Yes, I'd like to receive occasional updates and tips from Anchor Lock Home Watch.</span>
+						</label>
+						{#if formError}
+							<p class="form-error">{formError}</p>
+						{/if}
+						<button type="submit" class="btn-primary btn-lg btn-full" disabled={formLoading}>
+							{formLoading ? 'Sending…' : 'Send Message'}
+						</button>
 					</form>
 				{/if}
 			</div>
@@ -786,6 +818,32 @@
 	}
 	input:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(11,122,138,0.1); }
 	textarea { resize: vertical; }
+
+	.opt-in-label {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 0.6rem;
+		font-size: 0.82rem;
+		font-weight: 400;
+		color: var(--mid);
+		cursor: pointer;
+	}
+	.opt-in-label input[type="checkbox"] {
+		margin-top: 2px;
+		flex-shrink: 0;
+		accent-color: var(--teal);
+		width: 15px;
+		height: 15px;
+	}
+
+	.form-error {
+		color: #c0392b;
+		font-size: 0.875rem;
+		background: #fdf0ef;
+		border: 1px solid #f5c6c3;
+		border-radius: 6px;
+		padding: 0.65rem 0.9rem;
+	}
 
 	.form-success {
 		text-align: center;
