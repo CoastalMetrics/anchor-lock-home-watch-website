@@ -148,7 +148,7 @@
 			<button class="btn-ghost btn-lg" onclick={() => scrollTo('services')}>See What We Do</button>
 		</div>
 		<div class="hero-badges">
-			<span>✓ Licensed, Insured, & Bonded</span>
+			<span>✓ Licensed & Insured</span>
 			<span>✓ Detailed Visit Reports</span>
 			<span>✓ Locally Owned</span>
 		</div>
